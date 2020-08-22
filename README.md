@@ -10,5 +10,5 @@ Bot para Discord
 * DJ
 
 ## License
-[MIT](https://github.com/NewCraft/NewOS/blob/master/LICENSE)
+[MIT](https://github.com/NewCraft-Corporation/BOT_ts_pirata/blob/master/LICENSE)
 
