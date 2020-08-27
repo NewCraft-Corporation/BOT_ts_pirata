@@ -1,3 +1,5 @@
+// Copyright (©) 2020 NewCraft Corporation. All rights reserved. MIT License.
+
 const cara = [
     '( ͠° ͟ʖ ͡°)',
     '( ͡~ ͜ʖ ͡°)',
