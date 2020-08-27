@@ -1,3 +1,5 @@
+// Copyright (©) 2020 NewCraft Corporation. All rights reserved. MIT License.
+
 module.exports.run = async (client, message, args) => {
   if(!message.member.roles.cache.find(r => r.name === "TS_MANAGE")) {
     message.channel.send(`<@!${message.author.id}> vc ñ é TS MANAGE`) 
