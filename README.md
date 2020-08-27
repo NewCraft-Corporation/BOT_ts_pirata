@@ -20,6 +20,11 @@ bot para discord
 * moment
 
 
+### baixar
+
+```Bourne shell
+wget https://github.com/NewCraft-Corporation/BOT_ts_pirata/archive/master.zip
+```
 
 ## License
 
