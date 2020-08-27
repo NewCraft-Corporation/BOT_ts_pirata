@@ -14,14 +14,14 @@ const client = new Discord.Client();
 const config = require("./config.json");
 const firebase = require("firebase");
 
-var firebaseConfig = {
-  apiKey: "",
-  authDomain: "",
-  databaseURL: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: ""
+var firebaseConfig = {  
+  apiKey: process.env.APIKEYDB,
+  authDomain: process.env.AUTHDOMAINDB,
+  databaseURL: process.env.DATABASEURLDB,
+  projectId: process.env.PROJECTIDDB,
+  storageBucket: process.env.STORAGEBUCKETDB,
+  messagingSenderId: process.env.MESSAGINGSENDERIDDB,
+  appId: process.env.APPIDDB
 };
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
@@ -57,7 +57,7 @@ client.on('message', function(message) {
             
                 let spamCh = message.guild.channels.cache.find(ch => ch.name === "spam");
                 if (!spamCh) return;
-
+                
                 let embedUp = new Discord.MessageEmbed()
                 .setTitle(`Parabéns, ${message.author.tag}.`)
                 .setDescription(`Você upou seu burrice para o level ${db.val().level+1}!`)
@@ -68,18 +68,29 @@ client.on('message', function(message) {
 });
 
 client.on("ready", () => {
-  /*let activities = [
+  
+  let stt = [
+    'STREAMING', 'WATCHING', 'PLAYING'
+  ]
+  let activities = [
       `${config.pr}help`,
+      `${config.pr}card help`,
       `TS Pirata melhor servidor!`,
       `${client.channels.cache.size} canais! TOP`,
       `${client.users.cache.size} usuários! 👁️👁️`
-  ],*/
-  let activities = [`MANUTENÇÃO NO CODE`],
+  ],
+  //let activities = [`MANUTENÇÃO NO CODE DO ACG`],
     i = 0;
-  setInterval( () => client.user.setActivity(`${activities[i++ % activities.length]}`,{type: "WATCHING"}), 500 * 30); 
-  client.user.setStatus("dnd").catch(console.error);
+  setInterval( () => client.user.setActivity(`${activities[i++ % activities.length]}`,{type: `${stt[i++ % stt.length]}` , url:'https://www.twitch.tv/elj159'}), 500 * 30); 
+  client.user.setStatus("online").catch(console.error);
 console.log("STATUS: OK!")
 });
+
+/*
+  type: 'STREAMING', url:'https://www.twitch.tv/elj159'
+  type: 'WATCHING'
+  type: 'PLAYING'
+*/
 
 //client.on("guildMemberAdd" ,(message, member) => {message.channel.send("oi")});
 //client.on("guildMemberRemove", console.log);
@@ -90,7 +101,77 @@ client.on('message', message => {
   
   if (message.author.bot) return;
   
-  if (!message.content.toLowerCase().startsWith(config.pr)) return;
+  if (!message.content.toLowerCase().startsWith(config.pr)) {
+    let oloko = Math.floor(Math.random() * 100 - 1) + 1;
+      //console.log(oloko);
+      if (oloko == 1) {
+        let msgRandom = [":eye::eye:", ":thinking:", ":smirk:", "Estou de Olho aqui", "Interessante"];
+        var msgR = msgRandom[Math.floor(Math.random() * msgRandom.length)];
+        message.reply(msgR);
+      };
+      if (oloko == 2) {
+        let reactRandom = ['👁️', '🐦', '🤳', '🤔', '🙄'];
+        var reactR = reactRandom[Math.floor(Math.random() * reactRandom.length)];
+        message.react(reactR)
+      };
+      if (oloko == 3) {
+        if (message.guild.id == "742487757988954213") {
+          var verificador = false;
+          var valordogift;
+          let nsoterio = Math.floor(Math.random() * 30 - 1) + 1;
+          if (nsoterio == 1) {
+            let nsoterio2 = Math.floor(Math.random() * 3 - 1) + 1;
+            if (nsoterio2  == 1) {
+              let nsoterio3 = Math.floor(Math.random() * 3 - 1) + 1;
+              if (nsoterio3  == 1) {
+                let nsoterio4 = Math.floor(Math.random() * 5 - 1) + 1;
+                if (nsoterio4  == 1) {
+                  verificador = true;
+                  valordogift = 6;
+                } else {
+                  verificador = true;
+                  valordogift = 4;
+                };
+              } else {
+                verificador = true;
+                valordogift = 3;
+              };
+            } else if (nsoterio2  == 2) {
+              verificador = true;
+              valordogift = 2;
+            } else {
+              verificador = true;
+              valordogift = 1;
+            };
+          };
+          if (verificador) {
+            let dbCarteiragift = database.ref(`Servidores/Card/Carteiras/${message.author.id}`);
+            dbCarteiragift.once('value').then(async function(gift) {
+              if (gift.val() == null) {
+                let embed = new Discord.MessageEmbed()
+                  .setTitle(`${message.author.tag}.`)
+                  .setDescription(`Você perdeu a chase de ganhar 緑 no ACG, porque vc não tem uma Carteira!\n\nfaça uma usando: ts!card criarcarteira`);
+                message.channel.send(embed);
+              } else {
+                var gift = gift.val();
+                var coin = gifts.coins;
+                coin = coin + valordogift;
+                dbCarteiragift.update({
+                  coins: coin
+                });
+                let embed = new Discord.MessageEmbed()
+                  .setTitle(`${message.author.tag}.`)
+                  .setDescription(`Você ganhou 緑${valordogift} no ACG\n\nMeus Parabéns`);
+                message.channel.send(embed);
+              };
+            });
+          }
+        };
+      };
+    return;
+  }
+  
+
   
   if (message.content.startsWith(`<@!${client.user.id}>`) || message.content.startsWith(`<@${client.user.id}>`)) return;
   

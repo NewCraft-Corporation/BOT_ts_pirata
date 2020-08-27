@@ -5,7 +5,7 @@ exports.run = async (client, message, args) => {
 var list = ['https://loritta.website/assets/img/actions/attack/generic/gif_87.gif', 'https://loritta.website/assets/img/actions/attack/generic/gif_49.gif', 'https://loritta.website/assets/img/actions/attack/generic/gif_6.gif', 'https://loritta.website/assets/img/actions/attack/generic/gif_79.gif', 'https://loritta.website/assets/img/actions/attack/generic/gif_86.gif', 'https://loritta.website/assets/img/actions/attack/generic/gif_65.gif', 'https://loritta.website/assets/img/actions/attack/generic/gif_35.gif', 'https://loritta.website/assets/img/actions/attack/generic/gif_70.gif', 'https://loritta.website/assets/img/actions/attack/generic/gif_1.gif', 'https://loritta.website/assets/img/actions/attack/generic/gif_2.gif', 'https://loritta.website/assets/img/actions/attack/generic/gif_3.gif', 'https://loritta.website/assets/img/actions/attack/generic/gif_4.gif', 'https://loritta.website/assets/img/actions/attack/generic/gif_5.gif', 'https://loritta.website/assets/img/actions/attack/generic/gif_7.gif'];
 
 var rand = list[Math.floor(Math.random() * list.length)];
-let user = message.mentions.users.first() || client.user.cache.get(args[0]);
+let user = message.mentions.users.first();
 
 if (!user) {
 message.reply('esqueceu de citar quem quer atacar!!');

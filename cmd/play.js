@@ -5,7 +5,7 @@ const moment = require("moment");
 
 var opts = yts.YouTubeSearchOptions = {
     maxResults: 10,
-    key: "AIzaSyCPRM3J_O8QB8-YLtV3ZiS9xjIKDbbXsK4"
+    key: process.env.KEYYOUTUBEID
 };
 
 exports.run = (client, message, args, database, ops) => {

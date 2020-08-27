@@ -1,15 +1,15 @@
 const Discord = require("discord.js");
 const dir = "Servidores/Card/Carteiras";
-const dir2 = "Servidores/Card/Deck";
-const dir3 = "Servidores/Card/Cards";
+const dir2 = "Servidores/Card/Cards";
 var tc;
 
 module.exports.run = async (client, message, args, database) => {
   if (message.author.id !== "390674797908197386") return;
+  message.delete().catch(O_o => {});
   var sayMessage = args[1];
   if (sayMessage == null) return;
 
-  var dbref = await database.ref(`${dir3}/${sayMessage}`).once('value');
+  var dbref = await database.ref(`${dir2}/${sayMessage}`).once('value');
       
   if (dbref.val() == null) {
     console.error('Erro:' + err);
@@ -26,38 +26,28 @@ module.exports.run = async (client, message, args, database) => {
       await message.channel.send(embed);
     } else {
       const b = db.val();
-      tc = b.totaldecartas;
+      if (!b.cards) {
+        tc = 0;
+      } else {
+        tc = b.cards.length;
+      }
       tc1 = tc + 1;
       if (tc == 0) {
         var list = [''];
         list[0] = `${sayMessage}`;
-        var dbre2 = database.ref(`${dir2}/${message.author.id}`);
-        dbre2.once('value').then(async function(db) {
-            dbre2.set({
-              sleeve: list
-            });
+        dbrefCarteira.update({
+          cards: list
         });
 
       } else {
-        var dbref = await database.ref(`${dir2}/${message.author.id}/sleeve`).once('value');
-        var dbrefs = dbref.val();
-        list = dbrefs;
+        list = b.cards;
         list[tc] = `${sayMessage}`;
       
-        var dbre2 = database.ref(`${dir2}/${message.author.id}`);
-        dbre2.once('value').then(async function(db) {
-          if (db.val()) {
-            dbre2.update({
-              sleeve: list
-            });
-          }
+        dbrefCarteira.update({
+          cards: list
         });
           
       };
-      dbrefCarteira.update({
-        totaldecartas: tc1
-      });
     }
   });
 };
-

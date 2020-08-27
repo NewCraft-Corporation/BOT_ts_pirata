@@ -16,43 +16,42 @@ module.exports.run = async (client, message, args, database) => {
       await message.channel.send(embed);
     } else {
       const b = db.val();
-      tc = b.totaldecartas;
+      if (!b.cards) {
+        tc = 0;
+      } else {
+        tc = b.cards.length;
+      }
       var ctl = 0;
       var list = [];
       var bol = false;
       var bl = false;
       var n;
       while (ctl < tc) {
-        var dbref = await database.ref(`${dir2}/${message.author.id}/sleeve`).once('value');
-        var dbrefs = dbref.val();
-        if (sayMessage == dbrefs[ctl]) {
+        if (sayMessage == b.cards[ctl]) {
           bol = true;
           n = ctl;
-          list = dbrefs;
+          list = b.cards;
         };        
         ctl++;
       };
-      if ( tc == 1 ) {
-        var tc1 = tc - 1;
-        let dbre2 = database.ref(`${dir2}/${message.author.id}`);
-        dbre2.once('value').then(async function(db) {
-          if (db.val()) {
-            dbre2.remove();
-          }
-        });
-        dbrefCarteira.update({
-          totaldecartas: tc1
-        });
-        return;
-      }
+      
       if (bol) {
+        if ( tc == 1 ) {
+          dbrefCarteira.update({
+          cards: null
+          });
 
+          let embed = new Discord.MessageEmbed()
+            .setTitle(`${message.author.tag}.`)
+            .setDescription(`carta removida`);
+          await message.channel.send(embed);
+          return;
+        }
         //console.log(n);
         //console.log(list);
         var ctl = 0;
         var tc1 = tc - 1;
         while (ctl < tc) {
-          var x, y;
           if (ctl == n) {
             list[ctl] = list[tc1];
             //console.log(list[ctl]);
@@ -65,24 +64,16 @@ module.exports.run = async (client, message, args, database) => {
             list[ctl] = null;
           };
         };
-        var dbre2 = database.ref(`${dir2}/${message.author.id}`);
-        dbre2.once('value').then(async function(db) {
-          if (db.val()) {
-            dbre2.update({
-              sleeve: list
-            });
-          }
-        });
-        
-        
         dbrefCarteira.update({
-          totaldecartas: tc1
+          cards: list
         });
+        
+        let embed = new Discord.MessageEmbed()
+          .setTitle(`${message.author.tag}.`)
+          .setDescription(`carta removida`);
+        await message.channel.send(embed);
+        return;
       };
-      let embed = new Discord.MessageEmbed()
-        .setTitle(`${message.author.tag}.`)
-        .setDescription(`carta removida`);
-      await message.channel.send(embed);
     };
   });
 };

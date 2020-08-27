@@ -1,24 +1,36 @@
 const Discord = require("discord.js");
 const superagent = require('superagent');
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message, args, database) => {
+
+var bol = false;
+var dbref = await database.ref(`Servidores/config/vip`).once('value');
+var dbrefs = dbref.val();
+var ctl = 0;
+
+while (ctl < dbrefs.length) {
+  if (message.author.id == dbrefs[ctl]) {
+    bol = true;
+  }
+  ctl++;
+};
+
+if (bol == false) {
+  message.reply("você tem que ser premium");
+  return;
+};
 
 const {
         body
     } = await superagent
-        .get(`https://nekos.life/api/v2/img/slap`);
+        .get(`https://nekos.life/api/v2/img/smug`);
+        
 
-
-let user = message.mentions.users.first();
-
-if (!user) {
-return message.reply('esqueceu de citar quem quer dar um tapa!!');
-}
 let avatar = message.author.displayAvatarURL({format: 'png'});
   const embed = new Discord.MessageEmbed()
-        .setTitle('TAPA')
+        .setTitle('SMUG :gem:')
         .setColor('#00ff00')
-        .setDescription(`:punch: ${message.author} deu um **tapa** ${user}`)
+        .setDescription(`:relieved: ${message.author} está **presunçoso(a)** :relieved:`)
         .setImage(body.url)
         .setTimestamp()
         .setThumbnail(avatar)

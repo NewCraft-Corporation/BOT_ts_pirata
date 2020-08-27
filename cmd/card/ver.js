@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const dir = "Servidores/Card/Carteiras";
 const dir2 = "Servidores/Card/Deck";
-var tc;
+var tc, dbref;
 
 module.exports.run = async (client, message, args, database) => {
   let dbrefCarteira = database.ref(`${dir}/${message.author.id}`);
@@ -13,11 +13,16 @@ module.exports.run = async (client, message, args, database) => {
       await message.channel.send(embed);
     } else { 
       const b = db.val();
-      tc = b.totaldecartas;
-      var dbref = await database.ref(`${dir2}/${message.author.id}/sleeve`).once('value');
+      if (!b.cards) {
+        tc = 0;
+        dbref = "Nada meu amigo ZZzz..";
+      } else {
+        dbref = b.cards;
+        tc = b.cards.length;
+      }
       let embed = new Discord.MessageEmbed()
         .setTitle("Lista de Cartas")
-        .setDescription(`Você tem ${tc} de card\n\n**${dbref.val()}**`)
+        .setDescription(`Você tem ${tc} de card\n\n**${dbref}**`)
         .setThumbnail(b.avatar)
         .setFooter("NewCraft", "https://cdn.discordapp.com/attachments/742046290833178725/744997183421546617/tenor.gif");
       await message.channel.send(embed);

@@ -1,25 +1,40 @@
 const Discord = require("discord.js");
 const superagent = require('superagent');
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message, args, database) => {
 
+var bol = false;
+var dbref = await database.ref(`Servidores/config/vip`).once('value');
+var dbrefs = dbref.val();
+var ctl = 0;
+
+while (ctl < dbrefs.length) {
+  if (message.author.id == dbrefs[ctl]) {
+    bol = true;
+  }
+  ctl++;
+};
+
+if (bol == false) {
+  message.reply("você tem que ser premium");
+  return;
+};
 
 const {
         body
     } = await superagent
-        .get(`https://nekos.life/api/v2/img/kiss`);
-
-
+        .get(`https://nekos.life/api/v2/img/pat`);
+        
 let user = message.mentions.users.first();
 
 if (!user) {
-return message.reply('esqueceu de citar quem quer beijar!!');
+return message.reply('esqueceu de citar quem quer fazer consolar!!');
 }
 let avatar = message.author.displayAvatarURL({format: 'png'});
   const embed = new Discord.MessageEmbed()
-        .setTitle('BEIJO')
+        .setTitle('CONSOLAR :gem:')
         .setColor('#00ff00')
-        .setDescription(`:kiss: ${message.author} **beijou** ${user}`)
+        .setDescription(`:relaxed: ${message.author} **CONSOLOU**  ${user}`)
         .setImage(body.url)
         .setTimestamp()
         .setThumbnail(avatar)

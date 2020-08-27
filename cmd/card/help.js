@@ -21,23 +21,27 @@ module.exports.run = async (client, message, args) => {
 
     .addField("**CMD DO ACG**", "===========", false)
 
-    .addField(`${pr} criarcarteira`, "criar a seu carteira", true)
+    .addField(`${pr} criarcarteira`, "criar a sua carteira", true)
 
     .addField(`${pr} status {novo}`, "edita seus status da sua carteira", true)
 
-    .addField(`${pr} carteira`, "ver a seu carteira", true)
+    .addField(`${pr} carteira`, "ver a sua carteira", true)
 
-    .addField(`${pr} deletarcarteira`, "deleta seu carteira e seus coleção", true)
+    .addField(`${pr} deletarcarteira`, "deleta a sua carteira e sua coleção", true)
 
-    .addField(`${pr} ver`, "ver todos suas cartas da sua coleção", true)
+    .addField(`${pr} ver`, "ver todos as suas cards da sua coleção", true)
 
-    .addField(`${pr} del {id}`, "deleta sua carta", true)
+    .addField(`${pr} {id da carta}`, "ver a card especifica da sua coleção", true)
 
-    .addField(`${pr} dar {d} {nick}`, "dar uma carta para outro usuario", true)
+    .addField(`${pr} del {id da carta}`, "deleta uma card especifica da sua coleção", true)
 
-    .addField(`${pr} buster abrir`, "abre um buster com 3 cards", true)
+    .addField(`${pr} {id seu carta} {nick} {valor}`, "vender um card para um usuario", true)
 
-    .addField(`${pr} buster give {nick}`, "dar de presente um buster para um usuario", true)
+    .addField(`${pr} {id seu carta} {nick} {id da carta do outro}`, "trocar um card para outro usuario", true)
+
+    .addField(`${pr} boosters abrir`, "abre um boosters com 1 card", true)
+
+    .addField(`${pr} boosters give {nick} {valor}`, "vender um booster para um usuario", true)
 
     .setImage(imgRand)
 

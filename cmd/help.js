@@ -48,7 +48,9 @@ module.exports.run = async (client, message, args) => {
 
     .addField(`${pr}ppt`, "pedra, papel ou tesoura", true)
 
-    .addField(`${pr}dado`, "dado de 6 lados", true) /*
+    .addField(`${pr}dado`, "dado de 6 lados", true)
+
+    .addField(`${pr}card help`, "ajuda do AGC", true) /*
 
     .addField("**CMD DE MUSICA**", "===========", false)
 
