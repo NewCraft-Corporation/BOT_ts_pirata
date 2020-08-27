@@ -1,3 +1,5 @@
+// Copyright (©) 2020 NewCraft Corporation. All rights reserved. MIT License.
+
 exports.run = (client, message, args, database, ops) => {
     if(!message.member.roles.cache.find(r => r.name === "DJ")) {
       message.channel.send(`<@!${message.author.id}> vc ñ é DJ`) 

@@ -1,3 +1,5 @@
+// Copyright (©) 2020 NewCraft Corporation. All rights reserved. MIT License.
+
 const config = require("../config.json");
 exports.run = (client, message, args, database, ops) => {
     if (ops.active.get(message.guild.id)) ops.active.delete(message.guild.id);

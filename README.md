@@ -17,7 +17,3 @@ merge-img
 weather-js
 opusscript
 moment
-
-
-## License
-[MIT](https://github.com/NewCraft-Corporation/BOT_ts_pirata/blob/master/LICENSE)
