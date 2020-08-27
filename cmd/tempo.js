@@ -1,3 +1,5 @@
+// Copyright (©) 2020 NewCraft Corporation. All rights reserved. MIT License.
+
 var weather = require('weather-js');
 const Discord = require('discord.js')
 
