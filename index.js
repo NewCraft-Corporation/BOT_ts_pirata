@@ -16,7 +16,7 @@ const client = new Discord.Client();
 const config = require("./config.json");
 const firebase = require("firebase");
 
-var firebaseConfig = {  
+var firebaseConfig = {
   apiKey: process.env.APIKEYDB,
   authDomain: process.env.AUTHDOMAINDB,
   databaseURL: process.env.DATABASEURLDB,
@@ -120,7 +120,7 @@ client.on('message', message => {
         if (message.guild.id == "742487757988954213") {
           var verificador = false;
           var valordogift;
-          let nsoterio = Math.floor(Math.random() * 30 - 1) + 1;
+          let nsoterio = Math.floor(Math.random() * 3 - 1) + 1;
           if (nsoterio == 1) {
             let nsoterio2 = Math.floor(Math.random() * 3 - 1) + 1;
             if (nsoterio2  == 1) {
@@ -129,21 +129,21 @@ client.on('message', message => {
                 let nsoterio4 = Math.floor(Math.random() * 5 - 1) + 1;
                 if (nsoterio4  == 1) {
                   verificador = true;
-                  valordogift = 6;
+                  valordogift = 600;
                 } else {
                   verificador = true;
-                  valordogift = 4;
+                  valordogift = 400;
                 };
               } else {
                 verificador = true;
-                valordogift = 3;
+                valordogift = 300;
               };
             } else if (nsoterio2  == 2) {
               verificador = true;
-              valordogift = 2;
+              valordogift = 200;
             } else {
               verificador = true;
-              valordogift = 1;
+              valordogift = 100;
             };
           };
           if (verificador) {

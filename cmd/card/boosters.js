@@ -272,7 +272,7 @@ module.exports.run = async (client, message, args, database) => {
 
           if (message.guild.id == "742487757988954213") {
             tb1 = tb + 1
-            var btsv = 6
+            var btsv = 10
             var cash2 = cash - btsv
             dbrefCarteira.update({
               boosters: tb1,

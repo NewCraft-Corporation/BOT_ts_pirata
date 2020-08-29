@@ -45,6 +45,13 @@ module.exports.run = async (client, message, args) => {
 
     .addField(`${pr} boosters give {nick} {valor}`, "vender um booster para um usuario", true)
 
+    .addField(`${pr} boosters get`, "comprar um booster", true)
+
+    .addField(`${pr} cut {id seu carta}`, "ragar seu card para conseguir fragmentos", true)
+
+
+    .addField(`${pr} forge`, "forge seu fragmentos para conseguir coins", true)
+
     .setImage(imgRand)
 
     .setFooter("NewCraft", "https://cdn.discordapp.com/attachments/742046290833178725/744997183421546617/tenor.gif")

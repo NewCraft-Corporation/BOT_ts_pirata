@@ -42,7 +42,7 @@ module.exports.run = async (client, message, args, database) => {
       const title = `CARTEIRA ${vip}`;
       let embed = new Discord.MessageEmbed()
         .setTitle(title)
-        .setDescription(`**Nome: ${b.nick}**\n  ${b.status} \n\n**Coins: 緑${b.coins}\nBoosters: ${b.boosters}\nTotal de cartas: ${totalcards}**`)
+        .setDescription(`**Nome: ${b.nick}**\n  ${b.status} \n\n**:moneybag:Coins: 緑${b.coins}\n:shopping_bags:Boosters: ${b.boosters}\n:white_small_square:Fragmentos: ${b.fragmentos}\n\n:tickets:Total de cartas: ${totalcards}**`)
         .setThumbnail(b.avatar)
         .setFooter("NewCraft", "https://cdn.discordapp.com/attachments/742046290833178725/744997183421546617/tenor.gif");
       await message.channel.send(embed);

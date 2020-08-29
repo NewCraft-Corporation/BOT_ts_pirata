@@ -18,7 +18,8 @@ module.exports.run = async (client, message, args, database) => {
         nick: `${name}`,
         avatar: `${linkAvatar}`,
         status: ' Nada',
-        boosters: 0
+        boosters: 0,
+        fragmentos: 0
       });
       dbref.once('value').then(async function(db) {
         let embed = new Discord.MessageEmbed()
